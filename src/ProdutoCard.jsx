@@ -1,60 +1,55 @@
 import React from 'react';
 import styled from 'styled-components';
 
-// 1. Estilização do Container Principal do Card
+// Estilos com Styled Components
 const CardContainer = styled.div`
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 16px;
+  width: 250px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  width: 280px;
-  padding: 16px;
-  border-radius: 8px;
-  border: 1px solid #dee2e6;
-  background-color: #ffffff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
+  gap: 12px;
+  font-family: sans-serif;
 `;
 
-// 2. Estilização do Nome do Produto
-const NomeProduto = styled.h2`
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: #212529;
-  margin: 0 0 8px 0;
-`;
-
-// 3. Estilização do Preço do Produto
-const PrecoProduto = styled.span`
+const NomeProduto = styled.h3`
   font-size: 1.1rem;
-  color: #495057;
-  font-weight: 600;
-  margin-bottom: 16px;
+  color: #333;
+  margin: 0;
 `;
 
-// 4. Estilização Dinâmica do Botão com base na prop 'adicionado'
+const PrecoProduto = styled.span`
+  font-size: 1rem;
+  color: #2b8a3e;
+  font-weight: bold;
+`;
+
 const BotaoCarrinho = styled.button`
-  background-color: ${(props) => (props.adicionado ? '#198754' : '#6c757d')}; [cite: 1]
-  color: #ffffff;
+  /* Cor dinâmica baseada na prop 'adicionado' */
+  background-color: ${(props) => (props.adicionado ? '#198754' : '#6c757d')};
+  color: #fff;
   border: none;
   border-radius: 4px;
-  padding: 10px 16px;
-  font-size: 0.95rem;
-  font-weight: bold;
+  padding: 10px;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
 
   &:hover {
-    filter: brightness(0.9);
+    opacity: 0.9;
   }
 `;
 
-export function CardProduto({ nome, preco, adicionado, onToggleCarrinho }) {
+export default function ProdutoCard({ nome, preco, adicionado, aoAdicionar }) {
   return (
     <CardContainer>
       <NomeProduto>{nome}</NomeProduto>
-      <PrecoProduto>{preco}</PrecoProduto>
-      <BotaoCarrinho adicionado={adicionado} onClick={onToggleCarrinho}>
-        {adicionado ? 'Adicionado ao carrinho' : 'Adicionar ao carrinho'}
+      <PrecoProduto>R$ {preco}</PrecoProduto>
+      <BotaoCarrinho adicionado={adicionado} onClick={aoAdicionar}>
+        {adicionado ? 'Adicionado ao Carrinho' : 'Adicionar ao Carrinho'}
       </BotaoCarrinho>
     </CardContainer>
   );
